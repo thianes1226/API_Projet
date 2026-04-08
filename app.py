@@ -27,7 +27,7 @@ def hello():
     return "Hello, thiane ! bienvenue dans mon API Flask"
 
 ## recupérer toutes les personnes
-@app.route('/people/person', methods=['GET'])
+@app.route('/people/person')
 def get_people():
     """
     Récupérer toutes les personnes
@@ -90,7 +90,7 @@ def get_person(id):
 
 
 ## ajouter une personne
-@app.route('/people/person', methods=['POST'])
+@app.route('/people/person/add')
 def add_person():
     """
     Ajouter une personne
@@ -132,7 +132,7 @@ def add_person():
 
 
 ## supprimer une personne
-@app.route('/people/person/<int:id>', methods=['DELETE'])
+@app.route('/people/person/dellete/<int:id>')
 def delete_person(id):
     """
     Supprimer une personne
