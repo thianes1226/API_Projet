@@ -1,0 +1,60 @@
+
+swagger: "2.0"
+info:
+  title: API Personnes
+  version: "1.0"
+
+paths:
+
+  /people/person:
+    get:
+      summary: Récupérer toutes les personnes
+      responses:
+        200:
+          description: Liste des personnes
+
+    post:
+      summary: Ajouter une personne
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            type: object
+            properties:
+              lname:
+                type: string
+              fname:
+                type: string
+      responses:
+        201:
+          description: Personne ajoutée
+
+  /people/person/{id}:
+    get:
+      summary: Récupérer une personne
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: integer
+      responses:
+        200:
+          description: OK
+
+    delete:
+      summary: Supprimer une personne
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: integer
+      responses:
+        200:
+          description: Supprimée
+
+
+
+          
