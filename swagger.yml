@@ -1,40 +1,60 @@
-
 swagger: "2.0"
 info:
   title: API Personnes
-  version: "1.0"
+  description: Documentation de mon API Flask
+  version: 1.0.0
+
+basePath: /
 
 paths:
 
+  /:
+    get:
+      summary: Page d'accueil
+      responses:
+        200:
+          description: API fonctionne
+
   /people/person:
     get:
+      tags:
+        - Personnes
       summary: Récupérer toutes les personnes
       responses:
         200:
           description: Liste des personnes
 
     post:
+      tags:
+        - Personnes
       summary: Ajouter une personne
-      consumes:
-        - application/json
       parameters:
         - in: body
           name: body
           required: true
           schema:
             type: object
+            required:
+              - lname
+              - fname
             properties:
               lname:
                 type: string
+                example: Sarr
               fname:
                 type: string
+                example: Ali
       responses:
         201:
           description: Personne ajoutée
+        400:
+          description: Données invalides
 
   /people/person/{id}:
     get:
-      summary: Récupérer une personne
+      tags:
+        - Personnes
+      summary: Récupérer une personne par ID
       parameters:
         - name: id
           in: path
@@ -42,9 +62,45 @@ paths:
           type: integer
       responses:
         200:
-          description: OK
+          description: Personne trouvée
+        404:
+          description: Personne non trouvée
+
+    put:
+      tags:
+        - Personnes
+      summary: Modifier une personne
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: integer
+        - in: body
+          name: body
+          required: true
+          schema:
+            type: object
+            required:
+              - lname
+              - fname
+            properties:
+              lname:
+                type: string
+                example: Sarr
+              fname:
+                type: string
+                example: Ali
+      responses:
+        200:
+          description: Personne mise à jour
+        400:
+          description: Données invalides
+        404:
+          description: Personne non trouvée
 
     delete:
+      tags:
+        - Personnes
       summary: Supprimer une personne
       parameters:
         - name: id
@@ -53,8 +109,6 @@ paths:
           type: integer
       responses:
         200:
-          description: Supprimée
-
-
-
-          
+          description: Personne supprimée
+        404:
+          description: Personne non trouvée
