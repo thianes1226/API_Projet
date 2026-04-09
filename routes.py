@@ -3,17 +3,14 @@ from database import get_db_connection
 
 routes = Blueprint('routes', __name__)
 
-# =========================
-# Test route
-# =========================
+
+## Test route
 @routes.route('/', methods=['GET'])
 def hello():
     return "Bienvenue dans mon API Flask CRUD"
 
 
-# =========================
-# CREATE - Ajouter personne
-# =========================
+## Ajouter personne
 @routes.route('/people/person', methods=['POST'])
 def add_person():
     data = request.get_json()
@@ -35,10 +32,8 @@ def add_person():
 
     return jsonify({"message": "Personne ajoutée avec succès"}), 201
 
+## Toutes les personnes
 
-# =========================
-# READ - Toutes les personnes
-# =========================
 @routes.route('/people/person', methods=['GET'])
 def get_people():
     conn = get_db_connection()
@@ -56,9 +51,8 @@ def get_people():
     ])
 
 
-# =========================
-# READ - Une personne par ID
-# =========================
+
+## Une personne par ID
 @routes.route('/people/person/<int:id>', methods=['GET'])
 def get_person(id):
     conn = get_db_connection()
@@ -81,9 +75,7 @@ def get_person(id):
     })
 
 
-# =========================
-# UPDATE - Modifier personne
-# =========================
+## Modifier personne
 @routes.route('/people/person/<int:id>', methods=['PUT'])
 def update_person(id):
     data = request.get_json()
