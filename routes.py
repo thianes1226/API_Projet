@@ -4,7 +4,7 @@ from database import get_db_connection
 routes = Blueprint('routes', __name__)
 
 
-## Test route
+## Test mon API
 @routes.route('/', methods=['GET'])
 def hello():
     return "Bienvenue dans mon API Flask CRUD"
@@ -89,14 +89,14 @@ def update_person(id):
     conn = get_db_connection()
     cur = conn.cursor()
 
-    # vérifier si la personne existe
+    ## vérifier si la personne existe
     cur.execute("SELECT * FROM person WHERE id = %s;", (id,))
     if cur.fetchone() is None:
         cur.close()
         conn.close()
         return jsonify({"error": "Personne non trouvée"}), 404
 
-    # mise à jour
+    ## mise à jour
     cur.execute(
         "UPDATE person SET lname = %s, fname = %s WHERE id = %s",
         (lname, fname, id)
@@ -109,9 +109,7 @@ def update_person(id):
     return jsonify({"message": "Personne modifiée avec succès"}), 200
 
 
-# =========================
-# DELETE - Supprimer personne
-# =========================
+## Supprimer personne
 @routes.route('/people/person/<int:id>', methods=['DELETE'])
 def delete_person(id):
     conn = get_db_connection()
